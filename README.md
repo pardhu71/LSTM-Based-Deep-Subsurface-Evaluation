@@ -6,6 +6,8 @@
 **Institution:** KL University  
 **Batch ID:** 23IEESIOT14
 
+---
+
 ## Project Team
 
 | Name | Student ID |
@@ -38,7 +40,7 @@ The dataset contains subsurface measurements arranged across spatial locations.
 | X-Y locations | 21,920 |
 | Measurements per location | 625 |
 | Total measurement values | 13,700,000 |
-| Data type | uint16 |
+| Data type | `uint16` |
 
 Each X-Y location is represented by a profile containing 625 measurement values.
 
@@ -58,21 +60,27 @@ The project follows these major processing stages:
 
 The anomaly score is calculated as:
 
-\[
-S_i=\frac{1}{625}\sum_{j=1}^{625}|Z_{ij}-M_j|
-\]
+$$
+S_i = \frac{1}{625}\sum_{j=1}^{625}|Z_{ij}-M_j|
+$$
 
 Where:
 
-- \(Z_{ij}\) represents the measurement at location \(i\) and index \(j\).
-- \(M_j\) represents the median reference value at index \(j\).
-- \(S_i\) represents the anomaly score for location \(i\).
+- $Z_{ij}$ represents the measurement at location $i$ and index $j$.
+- $M_j$ represents the median reference value at index $j$.
+- $S_i$ represents the anomaly score for location $i$.
 
-The robust Z-score is:
+The robust Z-score is calculated as:
 
-\[
-R_i=0.6745\frac{S_i-\operatorname{median}(S)}{\operatorname{MAD}(S)}
-\]
+$$
+R_i = 0.6745 \frac{S_i-\operatorname{median}(S)}{\operatorname{MAD}(S)}
+$$
+
+Where:
+
+- $R_i$ represents the robust Z-score for location $i$.
+- $\operatorname{median}(S)$ represents the median of all anomaly scores.
+- $\operatorname{MAD}(S)$ represents the Median Absolute Deviation of the anomaly scores.
 
 Locations with robust Z-scores greater than 3.5 are labelled as abnormal candidates. Other locations are labelled as normal candidates.
 
@@ -120,6 +128,8 @@ The reported test-set confusion matrix is:
 |---|---:|---:|
 | Actual Normal | 3,946 | 10 |
 | Actual Abnormal | 3 | 425 |
+
+The classification metrics are:
 
 | Metric | Result |
 |---|---:|
